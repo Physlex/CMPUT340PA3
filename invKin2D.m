@@ -3,11 +3,13 @@ function [theta] = invKin2D(l, theta0, pos, n, mode)
 if (mode == 0) % Broyden's method
 
 xk = theta0;
-[~, Bk] = evalRobot2D(l, xk);
-for k = 0:n
+Bk = evalRobot2D(l, xk);
+for k = 1:n
     % Update x_next
-    [curr_pos, ~] = evalRobot2D(xk);
+    [curr_pos, ~] = evalRobot2D(l, xk);
     fx = curr_pos - pos;
+    disp(k);
+    disp(fx);
     sk = -Bk\fx;
     x_next = xk + sk;
 
@@ -29,16 +31,10 @@ elseif (mode == 1) % Newton's method
 xk = theta0; % Initial guess
 tolerance = 0.001;
 for k = 0:n
-    [curr_pos, ~] = evalRobot2D(l, xk);
+    [curr_pos, Jk] = evalRobot2D(l, xk);
     fx = curr_pos - pos;
-    if (fx >= -tolerance && fx <= tolerance)
-        theta = xk;
-        return;
-    else
-        Jk = fdJacob2D(l, fx, 0.001);
-        sk = -Jk\fx;
-        xk = xk + sk;
-    end
+    sk = -Jk\fx;
+    xk = xk + sk;
 end
 
 theta = xk;
