@@ -10,10 +10,11 @@ disp(J);
 
 %% PART 2
 
+% A
 % Finite difference approximation for the given problem is perfect at small
-% pertubations of h. Hence if we can handle small differences in output,
-% and exactness is not required, we can approximate faster then analytical.
+% pertubations of h.
 
+% B
 % In general solutions however, we typically reserve non-analytical sols.
 % for functions in which there is non-analytical answers, or the analytical
 % answer is very hard to retrieve.
@@ -27,4 +28,10 @@ disp(J0);
 disp(J1);
 disp(J2);
 
+%% PART 3 ^ 4
+
+
+
+
+%% Cleanup
 clear;
