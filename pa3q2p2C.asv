@@ -1,0 +1,41 @@
+% Global State
+l = [0.8; 0.7];
+mode = 1;
+iters = 1000;
+
+% Intial Conditions
+theta0 = [0.2259; 0.1707; 0.2277];
+theta = invKin3D(l, theta0, [1; sqrt(2)/2; 0], iters, mode);
+[pos, ~] = evalRobot3D(l, theta);
+pos = pos';
+
+disp(pos);
+
+% Plot for iter
+plotRobot3D(l, theta);
+pause;
+clf;
+
+%% Error State Version
+
+% Get a new set of angles
+pos = -pos;
+theta = invKin3D(l, rand(3, 1), pos, iters, mode);
+
+plotRobot3D(l, theta);
+pause;
+clf;
+
+% Solve for condition number
+% NOTE: Conditioning is fine for this operation
+[~, J] = evalRobot3D(l, theta);
+J_inv = inv(J);
+cn = norm(J) * norm(J_inv);
+
+%% ANSWER
+
+% Conditioning isn't an issue (3.4774 for my version)
+% so the issue must be physically related. In particular, we are gonna
+% smash the arm into itself in an attempt to swivel it around.
+%
+% There are a few solutions to this, firstly we ca
