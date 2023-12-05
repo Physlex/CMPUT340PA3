@@ -5,6 +5,7 @@ iters = 1000;
 
 % Intial Conditions
 theta = invKin3D(l, rand(3,1), rand(3,1), iters, mode);
+disp(theta);
 [pos, J] = evalRobot3D(l, theta);
 pos = pos';
 

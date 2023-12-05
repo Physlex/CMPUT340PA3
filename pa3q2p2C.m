@@ -9,8 +9,6 @@ theta = invKin3D(l, theta0, [1; sqrt(2)/2; 0], iters, mode);
 [pos, ~] = evalRobot3D(l, theta);
 pos = pos';
 
-disp(pos);
-
 % Plot for iter
 plotRobot3D(l, theta);
 pause;
@@ -59,3 +57,5 @@ disp(max_cn);
 %   a path around itself using A* or some similarly appropriate path
 %   planning algorithm. If we want manual control, as stated in the lab, we
 %   could always manually implement bezier's, though that would be a pain.
+
+clear;
